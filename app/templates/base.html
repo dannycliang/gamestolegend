@@ -1,0 +1,378 @@
+<html>
+  <head>
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="http://dannyliang.com/js/jquery.animateNumber.js"></script>
+  </head>
+  <style>
+    img {
+      -moz-transition: all .5s ease-in;
+      -o-transition: all .5s ease-in;
+      -webkit-transition: all .5s ease-in;
+      transition: all .5s ease-in;
+    }
+
+    p {
+      font-family: "Josefin Sans";
+      font-size: 1.5em;
+      text-align: center;
+      white-space: pre-wrap
+    }
+
+
+    h1 {
+      font-family: "Josefin Sans";
+      font-size: 2em;
+      font-weight: lighter;
+      display: inline;
+      line-height: 60px;
+      -moz-transition: all .5s ease-in;
+      -o-transition: all .5s ease-in;
+      -webkit-transition: all .5s ease-in;
+      transition: all .5s ease-in;
+    }
+
+    h2 {
+      font-family: "Josefin Sans";
+      font-size: 2em;
+      font-weight: lighter;
+    }
+
+    h3 {
+      font-family: "Josefin Sans";
+      font-size: 3em;
+      padding-right: 1em;
+      cursor:pointer;
+      font-weight: lighter;
+      -moz-transition: all .5s ease-in;
+      -o-transition: all .5s ease-in;
+      -webkit-transition: all .5s ease-in;
+      transition: all .5s ease-in;
+    }
+
+    h4 {
+      font-family: "Josefin Sans";
+      font-size: 3em;
+      text-align: center;
+      cursor:pointer;
+      font-weight: lighter;
+      -moz-transition: all .5s ease-in;
+      -o-transition: all .5s ease-in;
+      -webkit-transition: all .5s ease-in;
+      transition: all .5s ease-in;
+    }
+
+    h5 {
+      font-family: "Josefin Sans";
+      font-size: 1.5em;
+      text-align: center;
+      font-weight: lighter;
+    }
+
+    h6 {
+      font-family: "Josefin Sans";
+      font-size: 3em;
+      font-weight: lighter;
+      text-align: center;
+    }
+
+    img {
+      float: left;
+    }
+
+    ol {
+      list-style-type: none;
+    }
+
+    li {
+    	position: relative;
+      display: inline;
+      text-decoration: none;
+      font-family: "Josefin Sans";
+      font-size: 1.2em;
+      cursor:pointer;
+      margin-right: 0.5em;
+      -moz-transition: all .5s ease-in;
+      -o-transition: all .5s ease-in;
+      -webkit-transition: all .5s ease-in;
+      transition: all .5s ease-in;
+    }
+
+    li:before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: #707070;
+      visibility: hidden;
+      -webkit-transform: scaleX(0);
+      transform: scaleX(0);
+      -webkit-transition: all 0.5s ease-in-out 0s;
+      transition: all 0.5s ease-in-out 0s;
+    }
+
+    li:hover:before {
+      visibility: visible;
+      -webkit-transform: scaleX(0.9);
+      transform: scaleX(0.9);
+    }
+
+    li:hover{
+      color: #707070;
+    }
+
+    .title {
+      position: absolute;
+      top: 1em;
+      left: 3em;
+    }
+
+    .header {
+      position: absolute;
+      display: flex;
+      top: 1em;
+      right: 0.5em;
+      width: 30em;
+      padding-bottom: -3em;
+    }
+
+
+    .ManualForm {
+      position: relative;
+      display: inline-flex;
+      float: left;
+      top: 20%;
+    }
+
+    .FastForm {
+      position: relative;
+      display: inline-flex;
+      float: right;
+      top: 30%;
+    }
+
+    .man {
+      position: relative;
+      display: inline;
+      top: 15%;
+      width: 20em;
+      float: right;
+    }
+
+    .qui {
+      position: relative;
+      display: inline;
+      top: 15%;
+      width: 20em;
+      float: left;
+    }
+
+    #result {
+      position: absolute;
+      display: flex;
+      top: 30%;
+      width: 12em;
+      margin: 0 auto;
+      left: 0;
+      right: 0;
+    }
+
+    #AboutContainer {
+      position: absolute;
+      display: flex;
+      top: 20%;
+      width: 40em;
+      margin: 0 auto;
+      left: 0;
+      right: 0;
+    }
+
+    #leftimage {
+      width: 50%;
+      height: 100%;
+      float: left;
+      left: 0;
+    }
+
+    #rightimage {
+      width: 50%;
+      height: 100%;
+      float: right;
+      right: 0;
+    }
+
+  </style>
+  <body>
+    <div id = "AboutContainer">
+      <p id = "AboutText" style="display:none;"> This is a (by no means exact) tool for you to calculate how many games it'll take to reach your desired rank. It works by running 1000 simulations of your climb at the specified winrate, and averaging the number of games it takes to reach that rank. <br><br> Feel free to ask any questions and report any bugs to dclba726@gmail.com. <br> <br> Credits: <br> <br> <a href="https://icons8.com">Icon pack by Icons8</a> <br> <br>
+      <a href="https://www.flickr.com/photos/teorema-graphics/17301201523"> Background by Growing </a> <br> <br>
+      Games to Challenger isn’t endorsed by Riot Games and doesn’t reflect the views or opinions of Riot Games or anyone officially involved in producing or managing League of Legends. League of Legends and Riot Games are trademarks or registered trademarks of Riot Games, Inc. League of Legends © Riot Games, Inc. </p>
+    </div>
+    <div id = "result">
+      {% if games %}
+        <p id = "games"> You're about <span id="target" style="font-size: 100px; color:black;"> 0 </span> games away from {{ goal }} </p>
+      {% endif %}
+    </div>
+    <div id = "leftimage">
+    <div class = "title">
+      <h1 id = "name"> <img class="icon icons8-In-Progress" width="60" height="60" src="data:image/png;base64,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"> &nbsp;Games to Challenger </h1>
+    </div>
+        <div class = "qui">
+          <h4 id = "Quick" onmouseover="javascript:imageChange('leftimage')" onmouseout="javascript:imageRevert('leftimage')"> Quick Mode </h4>
+          <h5 id = "Instructions"> Hover for format </h5>
+          <p id = "QuickDesc"> Just enter your summoner name and goal rank. By default, it will use your current solo winrate, although you can override this by entering your own desired winrate </p>
+        </div>
+
+      <div class = "Fastform" id ="FastForm" style="display:none;">
+        {% block form %}{% endblock %}
+      </div>
+
+    </div>
+  </div>
+    <div id = "rightimage">
+      <div class = "header">
+        <ol>
+          <li id = "HS"> Hearthstone Simulator </li>
+          <li id = "Home"> Home </li>
+          <li id = "About"> About </li>
+          <li id = "Misc"> Miscellaneous </li>
+        </ol>
+      </div>
+      <div class = "man">
+        <h4 id = "Manual" onmouseover="javascript:imageChange()" onmouseout="javascript:imageRevert()"> Manual Mode </h4>
+          <h5 id = "InstructionsM"> Hover for format </h5>
+          <p id = "ManDesc"> Manually enter all your desired parameters. Use instead of quick mode for hypotheticals, more granular control, or anything else that it doesn't cover </p>
+      </div>
+      <div class = "ManualForm" id = "ManualForm" style = "display: none;">
+        {% block content %}{% endblock %}
+      </div>
+    </div>
+  <script>
+  $(document).ready(function(e) {
+    $( "#Quick" ).click(function qui() {
+      $("#result").fadeOut(300),
+        $("#Start").fadeOut(0),
+         $("#FastForm").fadeIn(500)
+      });
+    });
+    $(document).ready(function(e) {
+      $( "#Manual" ).click(function man() {
+        $("#Start").fadeOut(0),
+          $("#ManualForm").fadeIn(500),
+          $("#result").fadeOut(300)
+        });
+      });
+
+      $(document).ready(function () {
+        $('form').on('submit', function(e) {
+            e.preventDefault()
+            $.ajax({
+                url : $(this).attr('action'),
+                type: "POST",
+                data: $(this).serialize()
+            });
+        });
+});
+
+$(document).ready(function(e) {
+  $( "#Instructions" ).hover(function() {
+    $( "#QuickDesc" ).text("Summoner Name: Spaces and caps are irrelevant \n\n Goal Rank: Rank then Roman Numeral or Number (e.g. Diamond V or Diamond 5) \n\n Winrate: Integer between 0 and 100. Defaults to your current winrate") },
+    function() {$( "#QuickDesc" ).text("Just enter your summoner name and goal rank. By default, it will use your current solo winrate, although you can override this by entering your own desired winrate")}
+  )
+});
+
+$(document).ready(function(e) {
+  $( "#InstructionsM" ).hover(function() {
+    $("#ManDesc").css("font-size", "1em"),
+    $( "#ManDesc" ).text("Starting Rank: Rank then Roman Numeral or Number (e.g. Diamond V or Diamond 5) \n\n Current LP Gain: Integer, usually between 14 and 26 \n\n Current LP Loss: Integer, usually between 14 and 26 \n\n Current LP: Integer between 0 and 100 \n\n Wins in series: Number of wins if you're in a series. Enter 0 otherwise. \n\n Losses in series: Number of losses if you're in a series. Enter 0 otherwise. \n\n Goal Rank: Rank then Roman Numeral or Number (e.g. Diamond V or Diamond 5) \n\n Winrate: Integer between 0 and 100.") },
+    function() {$("#ManDesc").css("font-size", "1.5em"), $( "#ManDesc" ).text("Manually enter all your desired parameters. Use instead of quick mode for hypotheticals, more granular control, or anything else that it doesn't cover")}
+  )
+});
+
+
+$("form").on('submit', function(e){
+    var text = $(this).val();
+    $.ajax({
+      url: "/index",
+      type: "get",
+      data: {games: games},
+      success: function(response) {
+        $("#result").html(response)
+      },
+    });
+});
+
+
+var decimal_places = 1;
+var decimal_factor = decimal_places === 0 ? 1 : decimal_places * 10;
+if ({{ games }} < 1000) {
+  $("#target").animateNumber(
+    {
+      number: {{ games }},
+      color: 'black',
+      'font-size': '100px',
+
+      numberStep: function(now, tween) {
+        var floored_number = Math.floor(now) / decimal_factor,
+            target = $(tween.elem);
+        if (decimal_places > 0) {
+          floored_number = floored_number.toFixed(decimal_places);
+        }
+
+        target.text(floored_number);
+      }
+    },
+    2500
+  )
+} else {
+  $("#target").text("too damn many");
+}
+
+
+$("#Home").click(function() {
+  window.location.replace("http://dannyliang.com");
+});
+
+$("#About").click(function() {
+    $(".qui").toggle(500),
+      $(".man").toggle(500),
+        $("#games").toggle(500),
+        $("#AboutText").toggle(500)
+  });
+  </script>
+  <script>
+    function imageChange(image) {
+      if (image === 'leftimage') {
+        document.getElementById('leftimage').style.backgroundImage = 'url(http://i.imgur.com/KCcjr0r.png?1)';
+        document.getElementById('leftimage').style.backgroundSize = '100% 100%';
+        document.getElementById('name').style.color = "#FFF";
+        document.getElementById('Quick').style.color = "#FFF";
+      } else {
+        document.getElementById('rightimage').style.backgroundImage = 'url(http://i.imgur.com/7yEg6GJ.png?1)';
+        document.getElementById('rightimage').style.backgroundSize = '100% 100%';
+        document.getElementById('Manual').style.color = "#FFF";
+        li = document.getElementsByTagName('LI');
+        for (let i = 0; i < li.length; i++) {
+          li[i].style.color = "#FFF";
+        }
+      }
+    }
+    function imageRevert(image) {
+      if (image === 'leftimage') {
+        document.getElementById('leftimage').style.backgroundImage = 'url(https://openclipart.org/download/233689/north-korean-maze-mobile-casino.svg)';
+        document.getElementById('name').style.color = "#000";
+        document.getElementById('Quick').style.color = "#000";
+      } else {
+        document.getElementById('rightimage').style.backgroundImage = 'url(https://openclipart.org/download/233689/north-korean-maze-mobile-casino.svg)';
+        document.getElementById('Manual').style.color = "#000";
+        li = document.getElementsByTagName('LI');
+        for (let i = 0; i < li.length; i++) {
+          li[i].style.color = "#000";
+        }
+      }
+    }
+  </script>
+  </body>
+</html>
