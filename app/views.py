@@ -5,9 +5,6 @@ from .League import *
 from .Summoner2 import *
 
 
-@app.route('/')
-
-
 @app.route('/index', methods=['GET', 'POST'])
 def index():
     full_form = FullForm()
