@@ -2,7 +2,7 @@ from flask import render_template, flash, redirect
 from app import app
 from .forms import *
 from .League import *
-from .Summoner import *
+from .Summoner2 import *
 
 
 @app.route('/')
@@ -23,9 +23,8 @@ def index():
             games += sim.Ranked_calculate(full_form.goal.data, full_form.winrate.data)
             index += 1
     elif abridged_form.username.data and abridged_form.validate_on_submit():
-        url_open(abridged_form.username.data)
-        info = get_info()
-        sim = Player(info[0], info[3], 40 - info[3], int(info[1]), info[4], 0, 0)
+        info = get_info(abridged_form.username.data)
+        sim = Player(info[0], int(info[3]), 40 - int(info[3]), info[1], info[1] >= 100, 0, 0)
         goal = abridged_form.goal.data
         index = 0
         while index < 1000:
