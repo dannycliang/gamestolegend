@@ -5,7 +5,7 @@ from .League import *
 from .Summoner2 import *
 
 
-@app.route('/index', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def index():
     full_form = FullForm()
     abridged_form = AbridgedForm()
