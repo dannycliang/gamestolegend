@@ -296,10 +296,10 @@ $("form").on('submit', function(e){
     var text = $(this).val();
     $.ajax({
       url: "/index",
-      type: "get",
+      type: "GET",
       data: {games: games},
       success: function(response) {
-        $("#result").html(response)
+        $("#target").html(response)
       },
     });
 });
@@ -310,7 +310,7 @@ var decimal_factor = decimal_places === 0 ? 1 : decimal_places * 10;
 if ({{ games }} < 10000) {
   $("#target").animateNumber(
     {
-      number: {{ games }},
+      number: {{ games }} * 10,
       color: 'black',
       'font-size': '100px',
 
