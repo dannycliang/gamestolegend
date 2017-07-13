@@ -307,7 +307,7 @@ $("form").on('submit', function(e){
 
 var decimal_places = 1;
 var decimal_factor = decimal_places === 0 ? 1 : decimal_places * 10;
-if ({{ games }} < 1000) {
+if ({{ games }} < 10000) {
   $("#target").animateNumber(
     {
       number: {{ games }},
