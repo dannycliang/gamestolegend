@@ -22,8 +22,8 @@ def cl_validate(form, field):
 def clp_validate(form, field):
     if not isinstance(field.data, int):
         raise ValidationError("LP must be an integer")
-    elif field.data <= 0:
-        raise ValidationError("LP must be greater than 0")
+    elif field.data < 0:
+        raise ValidationError("LP must be greater or equal to 0")
     elif field.data > 100:
         raise ValidationError("LP must be less than 101")
 
@@ -44,9 +44,9 @@ def sl_validate(form, field):
         raise ValidationError("Series losses must be less than or equal to 2")
 
 def rank_validate(form, field):
-    ranks = ["Bronze", "Silver", "Gold", "Platinum", "Diamond"]
+    ranks = ["Bronze", "Silver", "Gold", "Platinum", "Diamond", "bronze", "silver", "gold", "platinum", "diamond"]
     too_high = ["Master", "Challenger"]
-    divisions = ["V", "IV", "III", "II", "I", 5, 4, 3, 2, 1]
+    divisions = ["V", "IV", "III", "II", "I", '5', '4', '3', '2', '1', "v", "iv", "iii", "ii", "i"]
     if len(field.data.split()) != 2:
         raise ValidationError("Not a valid rank")
     rank = field.data.split()[0]

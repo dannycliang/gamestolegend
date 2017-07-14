@@ -1,9 +1,11 @@
 from random import *
 
-Ranks = {'V': 5, 'IV': 4, 'III': 3, 'II': 2, 'I': 1, '5': 5, '4': 4, '3': 3, '2': 2, '1': 1}
+Ranks = {'V': 5, 'IV': 4, 'III': 3, 'II': 2, 'I': 1, '5': 5, '4': 4, '3': 3, '2': 2, '1': 1, 'v': 5, 'iv': 4, 'iii': 3, 'ii': 2, 'i': 1}
 reverse_Ranks = {5: 'V', 4: 'IV', 3: 'III', 2: 'II', 1: 'I'}
-tiers = {'bronze': 'Silver V', 'silver': 'Gold V', 'gold': 'Platinum V', 'platinum': 'Diamond V'}
-reverse_tiers = {'silver': "Bronze I", 'gold': 'Silver I', 'platinum': 'Gold I', 'diamond': 'Platinum I'}
+tiers = {'bronze': 'Silver V', 'silver': 'Gold V', 'gold': 'Platinum V', 'platinum': 'Diamond V', 'diamond': 'Master I'}
+reverse_tiers = {'silver': "Bronze I", 'gold': 'Silver I', 'platinum': 'Gold I', 'diamond': 'Platinum I', 'master': 'Diamond I'}
+homogenize_divison = {'5': 'V', '4': 'IV', '3': 'III', '2': 'II', '1':'I', 'V': 'V', 'IV': 'IV', 'III': 'III', 'II': 'II', 'I':'I', 'v': 'V', 'iv': 'IV', 'iii': 'III', 'ii': 'II', 'i':'I'}
+
 
 class Player:
     Current_Rank = ""
@@ -35,7 +37,8 @@ class Player:
         Simulate_Player = Player(self.Current_Rank, self.Current_Gain, self.Current_Loss, self.Current_LP, self.In_Series, self.Series_Wins, self.Series_Losses)
         winning = Winrate
         games = 0
-        while Simulate_Player.Current_Rank != Goal_Rank and games < 1000:
+        goal_rank = Goal_Rank.split()[0][:1].upper() + Goal_Rank.split()[0][1:].lower() + " " + homogenize_divison[Goal_Rank.split()[1].upper()]
+        while Simulate_Player.Current_Rank != goal_rank and games < 1000:
             result = randint(1, 80)
             if (winning > result):
                 Simulate_Player.win()
@@ -50,7 +53,7 @@ class Player:
         self.modify_gain(True)
         if self.In_Series:
             self.series_win()
-        elif new_LP >= 100:
+        elif new_LP >= 100 and "aster" not in self.Current_Rank:
             self.In_Series = True
             self.Current_LP = new_LP
         else:
@@ -111,7 +114,7 @@ class Player:
 
     def lose_Rank(self):
         if self.Current_Tier == 5:
-            if (self.Current_Ranking == "Bronze"):
+            if "ronze" in self.Current_Rank:
                 return
             self.Current_Tier = 1
             self.Current_LP = 75
@@ -134,7 +137,7 @@ class Player:
             if self.Current_LP == 0:
                 if self.Buffer == 0:
                     self.lose_Rank()
-                    return winrate + 2
+                    return winrate
                 else:
                     self.Buffer -= 1
             else:
