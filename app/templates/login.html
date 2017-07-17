@@ -1,6 +1,6 @@
 <!-- extend base layout -->
 {% extends "base.html" %}
-{% block content %}
+{% block form %}
     <form action="" method="post" name="full">
         {{ fform.hidden_tag() }}
             <h2 style="display:inline;"> Starting Rank </h2> {{ fform.rank(size=20) }}
@@ -8,33 +8,13 @@
                 <span style="color: red;"> <br>[{{ error }}]</span>
             {% endfor %}<br>
         {{ fform.hidden_tag() }}
-            <h2 style="display:inline;"> Current LP Gain </h2> {{ fform.current_gain(size=20) }}
-            {% for error in fform.current_gain.errors %}
+            <h2 style="display:inline;"> Current Stars </h2> {{ fform.current_stars(size=20) }}
+            {% for error in fform.current_stars.errors %}
                 <span style="color: red;"> <br>[{{ error }}]</span>
             {% endfor %}<br>
         {{ fform.hidden_tag() }}
-            <h2 style="display:inline;"> Current LP Loss </h2> {{ fform.current_loss(size=20) }}
-            {% for error in fform.current_loss.errors %}
-                <span style="color: red;"> <br>[{{ error }}]</span>
-            {% endfor %}<br>
-        {{ fform.hidden_tag() }}
-            <h2 style="display:inline;"> Current LP </h2> {{ fform.current_LP(size=20) }}
-            {% for error in fform.current_LP.errors %}
-                <span style="color: red;"> <br>[{{ error }}]</span>
-            {% endfor %}<br>
-        {{ fform.hidden_tag() }}
-            <h2 style="display:inline;"> In a series </h2> {{ fform.in_series(size=20) }}
-            {% for error in fform.in_series.errors %}
-                <span style="color: red;"> <br>[{{ error }}]</span>
-            {% endfor %}<br>
-        {{ fform.hidden_tag() }}
-            <h2 style="display:inline;"> Wins in series </h2> {{ fform.series_wins(size=20) }}
-            {% for error in fform.series_wins.errors %}
-                <span style="color: red;"> <br>[{{ error }}]</span>
-            {% endfor %}<br>
-        {{ fform.hidden_tag() }}
-            <h2 style="display:inline;"> Losses in series </h2>  {{ fform.series_losses(size=20) }}
-            {% for error in fform.series_losses.errors %}
+            <h2 style="display:inline;"> On Win Streak </h2> {{ fform.win_streak(size=20) }}
+            {% for error in fform.win_streak.errors %}
                 <span style="color: red;"> <br>[{{ error }}]</span>
             {% endfor %}<br>
         {{ fform.hidden_tag() }}
@@ -45,26 +25,6 @@
         {{ fform.hidden_tag() }}
             <h2 style="display:inline;"> Winrate </h2> {{ fform.winrate(size=20) }}
             {% for error in fform.winrate.errors %}
-                <span style="color: red;"> <br>[{{ error }}]</span>
-            {% endfor %}<br>
-        <p><input type="submit" value="Enter"></p>
-    </form>
-{% endblock %}
-{% block form %}
-    <form action="" method="post" name="abridged">
-        {{ aform.hidden_tag() }}
-            <h2 style="display:inline;"> Summoner Name </h2> {{ aform.username(size=20) }}
-            {% for error in aform.username.errors %}
-                <span style="color: red;"> <br>[{{ error }}]</span>
-            {% endfor %}<br>
-        {{ aform.hidden_tag() }}
-            <h2 style="display:inline;"> Goal Rank </h2> {{ aform.goal(size=20) }}
-            {% for error in aform.goal.errors %}
-                <span style="color: red;"> <br>[{{ error }}]</span>
-            {% endfor %}<br>
-        {{ aform.hidden_tag() }}
-            <h2 style="display:inline;"> Winrate </h2>  {{ aform.winrate(size=20) }}
-            {% for error in aform.winrate.errors %}
                 <span style="color: red;"> <br>[{{ error }}]</span>
             {% endfor %}<br>
         <p><input type="submit" value="Enter"></p>
