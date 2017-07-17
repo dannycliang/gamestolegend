@@ -207,7 +207,7 @@
     </div>
     <div class = "header">
       <ol>
-        <li id = "HS"> League Simulator </li>
+        <li id = "LS"> League Simulator </li>
         <li id = "Home"> Home </li>
         <li id = "About"> About </li>
         <li id = "Misc"> Miscellaneous </li>
@@ -451,7 +451,7 @@ if ({{ games }} < 1000) {
 
 
 $("#Home").click(function() {
-  window.location.replace("http://dannyliang.com");
+  window.location.href = "http://dannyliang.com";
 });
 
 $("#About").click(function() {
@@ -461,6 +461,10 @@ $("#About").click(function() {
         $("#AboutText").toggle(500),
         $("#FastForm").toggle(500)
   });
+
+$("#LS").click(function() {
+  window.location.href = "http://gamestodiamond.herokuapp.com";
+})
   </script>
   <script>
     function imageChange(image) {
