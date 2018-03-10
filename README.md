@@ -1,17 +1,8 @@
-microblog
-=========
+# Games To Legend
+Project to determine how many games it would take (approximately) to reach a player's desired rank in Hearthstone from their current rank, with a certain winrate. Uses 1000 simulations of your climb to do so.
 
-A decently featured microblogging web application written in Python and Flask that I'm developing in my Flask Mega-Tutorial series that begins [here](http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world).
+Uses: Python, HTML, Javascript, jQuery, Flask
 
-Installation
-------------
+Available at https://gamestolegend.herokuapp.com/
 
-The tutorial referenced above explains how to setup a virtual environment with all the required modules.
-
-The sqlite database must also be created before the application can run, and the `db_create.py` script takes care of that. See the [Database tutorial](http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-iv-database) for the details.
-
-Running
--------
-
-To run the application in the development web server just execute `run.py` with the Python interpreter from the flask virtual environment.
-
+League of Legends counterpart: https://gamestodiamond.herokuapp.com/
